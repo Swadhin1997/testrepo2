@@ -1,6 +1,7 @@
 def project_folder = "/var/lib/jenkins/workspace/dotnetweb/testwebapp/bin/Debug/net6.0"
 def JOB_NAME = 'DotnetSample'
 def backup_folder = '/var/lib/jenkins/workspace/webbackup'
+def server_folder = "${backup_folder}/${JOB_NAME}${currentBuild.number}"
 
 pipeline {
 agent any
@@ -17,7 +18,7 @@ agent any
 
         stage ("Clone Repository") {
                 steps {
-                   git branch: 'master', url: 'https://github.com/Swadhin1997/dotnet-hello-world.git'
+                   git branch: 'master', url: 'https://github.com/Swadhin1997/testrepo2.git'
                 }
             }  
         stage('Prep') {
@@ -31,7 +32,7 @@ agent any
         }  
         stage ('Building dll') {
             steps {
-               sh "dotnet build dotnet-hello-world.sln"
+               sh "dotnet build testwebapp.sln"
             }           
         }
         stage ('Copy proj to backup') {
@@ -40,6 +41,17 @@ agent any
                     echo "Copying project folder to backup folder"
                     sh "cp -r ${project_folder} ${backup_folder}/${JOB_NAME}${currentBuild.number}_$timestamp"
                     echo "Current timestamp :: $timestamp"
+                }
+            }
+        }
+        stage ('copy proj to servers') {
+            steps {
+                script{
+                     sh "whoami"
+                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
+                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/Users/Administrator/Downloads/dotnetbuild"
+}
+                    
                 }
             }
         }
