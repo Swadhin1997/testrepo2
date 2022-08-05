@@ -58,8 +58,8 @@ agent any
         stage ('stop the iis server'){
             steps {
                 script {
-                    bat "iis_server~~iis~~65.0.98.98"
-                      //powershell 'net stop was /y'
+                    ///bat "iis_server~~iis~~65.0.98.98"
+                    bat "STOP-net stop WAS"
                 }
             }
         }
@@ -78,8 +78,8 @@ agent any
          stage ('start the iis server'){
             steps {
                 script {
-                    bat "iis_server~~iis~~65.0.98.98"
-                     //powershell 'net start w3svc'
+                    //bat "iis_server~~iis~~65.0.98.98"
+                    bat " SYART-net start W3SVC'
                 }
             }
         }
