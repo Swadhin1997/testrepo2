@@ -59,6 +59,7 @@ agent any
             steps {
                 script {
                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
+                    sh "ssh -pw '${serverpasswd}' Administrator@65.0.98.98"
                     bat "STOP-net stop WAS"
                     }
                 }
