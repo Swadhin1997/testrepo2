@@ -58,8 +58,9 @@ agent any
         stage ('stop the iis server'){
             steps {
                 script {
-                    sh "iis_server~~iis~~65.0.98.98"
+                    withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
                     bat "STOP-net stop WAS"
+                    }
                 }
             }
         }
@@ -71,16 +72,17 @@ agent any
                      sh "whoami"
                      withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
                     sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
-}            
+                    }            
                 }
             }
         }
          stage ('start the iis server'){
             steps {
                 script {
-                    sh "iis_server~~iis~~65.0.98.98"
+                    withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
                     bat "START-net start W3SVC"
-                }
+                    }
+                } 
             }
         }
         stage('Quality Analysis') {
