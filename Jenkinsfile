@@ -50,7 +50,7 @@ agent any
                      sh "whoami"
                      withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
                     sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/inetpub/wwwroot/webbackups"
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                    //sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
 }
                     
                 }
