@@ -6,7 +6,7 @@ agent any
 
         stage ("Clone Repository") {
                 steps {
-                   git branch: 'main', url: 'https://github.com/Swadhin1997/demodotnet.git'
+                   git branch: 'master', url: 'https://github.com/Swadhin1997/testrepo2.git'
                 }
             }  
         stage('Prep') {
@@ -20,7 +20,7 @@ agent any
         }  
         stage ('Building dll') {
             steps {
-               sh "dotnet build Demo.sln"
+               sh "dotnet build testwebapp.sln"
             }           
         }
     }
