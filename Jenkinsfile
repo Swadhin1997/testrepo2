@@ -58,7 +58,7 @@ agent any
         stage ('stop the iis server'){
             steps {
                 script {
-                    ///bat "iis_server~~iis~~65.0.98.98"
+                    sh "iis_server~~iis~~65.0.98.98"
                     bat "STOP-net stop WAS"
                 }
             }
@@ -78,7 +78,7 @@ agent any
          stage ('start the iis server'){
             steps {
                 script {
-                    //bat "iis_server~~iis~~65.0.98.98"
+                    sh "iis_server~~iis~~65.0.98.98"
                     bat "START-net start W3SVC"
                 }
             }
