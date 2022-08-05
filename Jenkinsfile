@@ -57,7 +57,7 @@ agent any
     }
         stage ('stop the iis server'){
             steps {
-                script {sh "iis_server~~iis~~65.0.98.98 sshCommand(powershell 'net stop was /y')"
+                script {bat "iis_server~~iis~~65.0.98.98 sshCommand(powershell 'net stop was /y')"
                 }
             }
         }
@@ -75,7 +75,7 @@ agent any
         }
          stage ('start the iis server'){
             steps {
-                script {sh "iis_server~~iis~~65.0.98.98 sshCommand(powershell 'net start w3svc')"
+                script {bat "iis_server~~iis~~65.0.98.98 sshCommand(powershell 'net start w3svc')"
                 }
             }
         }
