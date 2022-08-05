@@ -1,7 +1,10 @@
+
 pipeline {
 agent any
-     options {
-        
+
+     
+     
+    
     stages {  
 
         stage ("Clone Repository") {
@@ -17,11 +20,6 @@ agent any
                     sh "export GIT_BRANCH=$GIT_BRANCH"
                 }
             }
-        }  
-        stage ('Building dll') {
-            steps {
-               sh "dotnet build testwebapp.sln"
-            }           
-        }
+        } 
     }
-    
+} 
