@@ -48,8 +48,8 @@ agent any
             steps {
                 script{
                      sh "whoami"
-                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/Users/Administrator/Downloads/dotnetbuild"
+                     withCredentials([string(credentialsId: 'iis_passwd', variable: 'iis_server')]) {
+                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@35.154.32.166:C:/inetpub/wwwroot/testwebapp"
 }
                     
                 }
