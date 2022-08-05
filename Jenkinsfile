@@ -1,7 +1,6 @@
-def project_folder = "/var/lib/jenkins/workspace/dotnetweb/hello-world-api/bin/Debug/netcoreapp2.0"
+def project_folder = "/var/lib/jenkins/workspace/dotnetweb/testwebapp/bin/Debug/net6.0"
 def JOB_NAME = 'DotnetSample'
 def backup_folder = '/var/lib/jenkins/workspace/webbackup'
-def server_folder = "${backup_folder}/${JOB_NAME}${currentBuild.number}"
 
 pipeline {
 agent any
@@ -41,17 +40,6 @@ agent any
                     echo "Copying project folder to backup folder"
                     sh "cp -r ${project_folder} ${backup_folder}/${JOB_NAME}${currentBuild.number}_$timestamp"
                     echo "Current timestamp :: $timestamp"
-                }
-            }
-        }
-        stage ('copy proj to servers') {
-            steps {
-                script{
-                     sh "whoami"
-                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/Users/Administrator/Downloads/dotnetbuild"
-}
-                    
                 }
             }
         }
