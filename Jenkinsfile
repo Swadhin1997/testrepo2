@@ -21,5 +21,10 @@ agent any
                 }
             }
         } 
+         stage ('Building dll') {
+            steps {
+               sh "dotnet build testwebapp.sln"
+            }           
+        } 
     }
 } 
