@@ -79,7 +79,7 @@ agent any
             steps {
                 script {
                     //bat "iis_server~~iis~~65.0.98.98"
-                    bat " SYART-net start W3SVC'
+                    bat "START-net start W3SVC"
                 }
             }
         }
