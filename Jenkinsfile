@@ -49,7 +49,7 @@ agent any
                 script{
                      sh "whoami"
                      withCredentials([string(credentialsId: 'iis_passwd', variable: 'iis_server')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@35.154.32.166:C:/inetpub/wwwroot/testwebapp"
+                    sh "echo y | pscp -r -pw '${iis_server}' ${server_folder}_$timestamp Administrator@35.154.32.166:C:/inetpub/wwwroot/testwebapp"
 }
                     
                 }
