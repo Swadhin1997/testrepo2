@@ -47,8 +47,11 @@ agent any
         stage ('copy proj to servers') {
             steps {
                 script{
-                     sh"scp -vvv -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/sampledotnet"
-                    
+                    sh "whoami"
+                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
+                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                    // sh"scp -vvv -o strictHostKeyChecking=no -r ${backup_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                     }
                 }
             }
         }
