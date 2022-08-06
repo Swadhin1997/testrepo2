@@ -63,11 +63,11 @@ agent any
                 }
             }
         }
-         stage ('start the iis server'){
+         stage ('start the iis server') {
             steps {
                 script {
                     sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc'"
-                    }
+                    
                 } 
             }
         }
