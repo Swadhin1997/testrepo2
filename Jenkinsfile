@@ -2,6 +2,7 @@ def project_folder = "/var/lib/jenkins/workspace/dotnetweb/testwebapp/bin/Debug/
 def JOB_NAME = 'DotnetSample'
 def backup_folder = '/var/lib/jenkins/workspace/webbackup'
 def server_folder = "${backup_folder}/${JOB_NAME}${currentBuild.number}"
+def remote = ':'
 
 pipeline {
 agent any
@@ -60,7 +61,7 @@ agent any
                 script {
                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
                         remote.user = Administrator
-                        remote.password = '${serverpasswd}'
+                        remote.password = windows_passwd
                     sh "sshpass -p '${serverpasswd}' ssh Administrator@65.0.98.98' echo '${serverpasswd}"
                     bat "netstat"
                     //bat "STOP-net stop WAS"
