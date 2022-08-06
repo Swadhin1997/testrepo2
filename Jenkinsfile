@@ -49,7 +49,7 @@ agent any
                 script{
                     sshagent(['deploy_user']) {
                    
-                     sh "sudo scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
+                     sh "sudo scp -o -S strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
                     } 
                 }
             }
