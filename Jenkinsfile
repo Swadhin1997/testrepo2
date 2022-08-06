@@ -47,10 +47,10 @@ agent any
         stage ('copy proj to servers') {
             steps {
                 script{
-                    sshagent(['iis_user']) {
                    
-                     sh "scp -o StrictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
-                    } 
+                   
+                     sh "scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
+                    
                 }
             }
         }
