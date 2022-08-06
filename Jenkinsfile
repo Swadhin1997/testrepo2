@@ -44,6 +44,17 @@ agent any
                 }
             }
         }
+        stage ('copy proj to servers') {
+            steps {
+                script{
+                   
+                   
+                     sh "scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
+                    
+                }
+            }
+        }
+    
         stage ('stop the iis server'){
             steps {
                 script {
@@ -58,16 +69,17 @@ agent any
                 script{
                      sh "whoami"
                      withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                    //sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
                     }            
                 }
             }
         }
-         stage ('start the iis server') {
+         stage ('start the iis server'){
             steps {
                 script {
-                    sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc'"
-                    
+                    withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
+                    bat "START-net start W3SVC"
+                    }
                 } 
             }
         }
