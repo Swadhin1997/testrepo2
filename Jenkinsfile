@@ -47,7 +47,7 @@ agent any
         stage ('copy proj to servers') {
             steps {
                 script{
-                     sh"scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/sampledotnet"
+                     sh"scp -vvv -o strictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/sampledotnet"
                     
                 }
             }
