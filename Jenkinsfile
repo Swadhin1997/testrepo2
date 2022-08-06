@@ -50,7 +50,7 @@ agent any
                     
                     
                      sh"scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/webbackups"
-                     }
+                     
                 }
             }
         }
@@ -98,8 +98,9 @@ agent any
                 }
             }  
             }
+            }
     }
 }
     }
-}
+
 
