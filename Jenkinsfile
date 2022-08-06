@@ -49,7 +49,7 @@ agent any
                 script{
                     sh "whoami"
                      withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                    sh "echo y | pscp -r ${server_folder}_$timestamp Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
                     // sh"scp -vvv -o strictHostKeyChecking=no -r ${backup_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
                      }
                 }
