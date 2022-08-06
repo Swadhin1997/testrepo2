@@ -62,7 +62,6 @@ agent any
                     }
                 }
             }
-        }
     
         
         stage ('replace the dll ') {
@@ -102,4 +101,5 @@ agent any
     }
 }
     }
+}
 
