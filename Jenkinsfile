@@ -49,7 +49,7 @@ agent any
                 script{
                     sshagent(['deploy_user']) {
                    
-                     sh "echo y | scp -rS ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
+                     sh "scp -o StrictHostKeyChecking=no -r ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
                     } 
                 }
             }
