@@ -69,7 +69,7 @@ agent any
                 script{
                      
                      
-                    sh "scp -o strictHostKeyChecking=no -r ${backup_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                    sh "scp -o strictHostKeyChecking=no -r ${project_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
                                 
                 }
             }
