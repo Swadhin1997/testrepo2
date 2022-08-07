@@ -49,7 +49,7 @@ agent any
                 script{
                    
                    
-                     sh "scp -vv -o strictHostKeyChecking=no -v ${backup_folder} Administrator@172.31.46.235:C:/inetpub/wwwroot/webbackups"
+                     sh "scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/webbackups"
                     
                 }
             }
