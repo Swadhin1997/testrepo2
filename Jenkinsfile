@@ -58,7 +58,7 @@ agent any
         stage ('stop the iis server'){
             steps {
                 script {
-                   sh "ssh Administrator@172.31.46.235 'powershell.exe net stop was /y'"
+                   sh "ssh Administrator@172.31.46.235 'powershell.exe net stop w3svc /y'"
                     }
                 }
             }
@@ -77,7 +77,7 @@ agent any
          stage ('start the iis server'){
             steps {
                 script {
-                    sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc'"
+                    sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc /y'"
                 } 
             }
         }
