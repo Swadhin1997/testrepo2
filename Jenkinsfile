@@ -47,13 +47,38 @@ agent any
         stage ('copy proj to servers') {
             steps {
                 script{
-                     sh "whoami"
-                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp Administrator@65.0.98.98:C:/inetpub/wwwroot/webbackups"
-                    //sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
-}
+                   
+                   
+                     sh "scp -o strictHostKeyChecking=no -r ${backup_folder} Administrator@65.0.98.98:C:/inetpub/wwwroot/webbackups"
                     
                 }
+            }
+        }
+    
+        stage ('stop the iis server'){
+            steps {
+                script {
+                   sh "ssh Administrator@172.31.46.235 'powershell.exe net stop w3svc /y'"
+                    }
+                }
+            }
+    
+        
+        stage ('replace the dll ') {
+            steps {
+                script{
+                     
+                     
+                    sh "scp -o strictHostKeyChecking=no -r ${project_folder}/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                                
+                }
+            }
+        }
+         stage ('start the iis server'){
+            steps {
+                script {
+                    sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc /y'"
+                } 
             }
         }
         stage('Quality Analysis') {
@@ -71,7 +96,9 @@ agent any
                 }
             }  
             }
+            }
     }
 }
     }
-}
+
+
