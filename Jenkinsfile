@@ -70,7 +70,7 @@ agent any
                      
                      
                     sh "scp -o strictHostKeyChecking=no -r ${backup_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
-                    }            
+                                
                 }
             }
         }
