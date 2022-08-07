@@ -67,9 +67,9 @@ agent any
         stage ('replace the dll ') {
             steps {
                 script{
-                     sh "whoami"
-                     withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    //sh "echo y | pscp -r -pw '${serverpasswd}' ${server_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
+                     
+                     
+                    sh "scp -o strictHostKeyChecking=no -r ${backup_folder}_$timestamp/* Administrator@65.0.98.98:C:/inetpub/wwwroot/sampledotnet"
                     }            
                 }
             }
@@ -77,9 +77,7 @@ agent any
          stage ('start the iis server'){
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'windows_passwd', variable: 'serverpasswd')]) {
-                    bat "START-net start W3SVC"
-                    }
+                    sh "ssh Administrator@172.31.46.235 'powershell.exe net start w3svc'"
                 } 
             }
         }
